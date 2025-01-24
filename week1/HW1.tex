@@ -1,0 +1,609 @@
+\documentclass[11pt]{article}
+
+\newcommand{\yourname}{}
+
+\def\comments{0}
+\def\code#1{\texttt{#1}}
+\newcommand{\finishproblem}{
+    \vspace{10pt}
+    \hrule
+    \vspace{10pt}
+}
+%format and packages
+
+%\usepackage{algorithm, algorithmic}
+\documentclass{article}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{algpseudocode}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{verbatim}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{microtype}
+\usepackage{kpfonts}
+\usepackage{palatino}
+	\DeclareMathAlphabet{\mathtt}{OT1}{cmtt}{m}{n}
+	\SetMathAlphabet{\mathtt}{bold}{OT1}{cmtt}{bx}{n}
+	\DeclareMathAlphabet{\mathsf}{OT1}{cmss}{m}{n}
+	\SetMathAlphabet{\mathsf}{bold}{OT1}{cmss}{bx}{n}
+	\renewcommand*\ttdefault{cmtt}
+	\renewcommand*\sfdefault{cmss}
+	\renewcommand{\baselinestretch}{1.06}
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{DarkGreen}{rgb}{0.15,0.5,0.15}
+\definecolor{DarkRed}{rgb}{0.6,0.2,0.2}
+\definecolor{DarkBlue}{rgb}{0.2,0.2,0.6}
+\definecolor{DarkPurple}{rgb}{0.4,0.2,0.4}
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+	linktocpage=true,
+	colorlinks=true,				% false: boxed links; true: colored links
+	linkcolor=DarkBlue,		% color of internal links
+	citecolor=DarkBlue,	% color of links to bibliography
+	urlcolor=DarkBlue,		% color of external links
+}
+
+\usepackage[boxruled,vlined,nofillcomment]{algorithm2e}
+	\SetKwProg{Fn}{Function}{\string:}{}
+	\SetKwFor{While}{While}{}{}
+	\SetKwFor{For}{For}{}{}
+	\SetKwIF{If}{ElseIf}{Else}{If}{:}{ElseIf}{Else}{:}
+	\SetKw{Return}{Return}
+	
+
+%enclosure macros
+\newcommand{\paren}[1]{\ensuremath{\left( {#1} \right)}}
+\newcommand{\bracket}[1]{\ensuremath{\left\{ {#1} \right\}}}
+\renewcommand{\sb}[1]{\ensuremath{\left[ {#1} \right\]}}
+\newcommand{\ab}[1]{\ensuremath{\left\langle {#1} \right\rangle}}
+
+%probability macros
+\newcommand{\ex}[2]{{\ifx&#1& \mathbb{E} \else \underset{#1}{\mathbb{E}} \fi \left[#2\right]}}
+\newcommand{\pr}[2]{{\ifx&#1& \mathbb{P} \else \underset{#1}{\mathbb{P}} \fi \left[#2\right]}}
+\newcommand{\var}[2]{{\ifx&#1& \mathrm{Var} \else \underset{#1}{\mathrm{Var}} \fi \left[#2\right]}}
+
+%useful CS macros
+\newcommand{\poly}{\mathrm{poly}}
+\newcommand{\polylog}{\mathrm{polylog}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\pmo}{\{\pm1\}}
+\newcommand{\getsr}{\gets_{\mbox{\tiny R}}}
+\newcommand{\card}[1]{\left| #1 \right|}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\negl}{\mathrm{negl}}
+\newcommand{\eps}{\varepsilon}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\eqand}{\qquad \textrm{and} \qquad}
+\newcommand{\ind}[1]{\mathbb{I}\{#1\}}
+\newcommand{\sslash}{\ensuremath{\mathbin{/\mkern-3mu/}}}
+
+%mathbb
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+%mathcal
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+%theorem macros
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{clm}[thm]{Claim}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{coro}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+
+
+\newcommand{\instructor}{Iraklis Tsekourakis}
+\newcommand{\hwnum}{1}
+%\newcommand{\hwdue}{Wednesday, January 27 at 11:59pm via \href{https://gradescope.com/courses/229309}{Gradescope}}
+
+\newtheorem{prob}{}
+\newtheorem{sol}{Solution}
+
+\definecolor{cit}{rgb}{0.05,0.2,0.45} 
+\newcommand{\solution}{\medskip\noindent{\color{DarkBlue}\textbf{Solution:}}}
+
+
+\begin{document}
+{\Large 
+\begin{center}{CS5800: Algorithms} ---  \instructor \end{center}}
+{\large
+\vspace{10pt}
+\noindent Homework~\hwnum \vspace{2pt}%\\
+%Due :~\hwdue
+}
+
+\bigskip
+{\large \noindent Name: Christo Frank Franklin }
+
+
+\vspace{15pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 1
+\begin{prob} \textbf{(18 points)} In the following, use a direct proof (by giving values for $c$ and $n_0$ in the formal definition of big-$O/\Omega$ notation) to prove that:
+\end{prob}
+\begin{enumerate}[label=(\alph*)]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1a
+\item $n^{2}+7n+1 \text { is } \Omega(n^{2})$ \\
+\solution
+\\
+
+
+The given function, \( f(n) = n^2 + 7n + 1 \).  
+\textbf
+\\{To Prove:} \( f(n) \) is \(\Omega(n^2)\).  \\
+
+\textbf{By the formal definition:}\\ if \( f(n) \) is \( \Omega(n^2) \), then
+
+\[
+f(n) \geq C \cdot g(n)
+\]
+\[
+n^2 + 7n + 1 \geq C \cdot g(n)
+\]
+Considering \( g(n) = n^2 \), we have  
+\[
+n^2 + 7n + 1 \geq C \cdot n^2
+\]
+Taking the value of \( C = 1 \), we get  
+\[
+n^2 + 7n + 1 \geq n^2
+\]
+\[
+7n + 1 \geq 0
+\]
+\[
+n \geq -\frac{1}{7}
+\]
+Hence, for all values above \( n > 1 \) here n = 1 and with \( C = 1 \), the equation holds good.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1b
+\item $3n^{2}+n-10 \text { is } O(n^{2})$ \\
+\solution
+
+The given function, \( f(n) = 3n^2 + n - 10 \).\\
+\textbf{By the formal definition:}\\
+If \( f(n) \) is \( O(n^2) \), then  
+\[
+f(n) \leq C \cdot g(n)
+\]
+\[
+3n^2 + n - 10 \leq C \cdot g(n)
+\]
+Considering \( g(n) = n^2 \), we have  
+\[
+3n^2 + n - 10 \leq C \cdot n^2
+\]
+Taking the value of \( C = 4 \), we get  
+\[
+3n^2 + n - 10 \leq 4n^2
+\]
+\[
+n^2 - n + 10 \geq 0
+\]
+From this expression, for any value of \( n \), the equation is satisfied.\\
+Hence, for all values above \( n > 1 \), here n = 1 and with \( C = 4 \), the equation holds good.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1c
+\item $n^2 \text { is } \Omega(n\lg n)$ \\
+\solution
+
+\textbf{Given function:} \( f(n) = n^2 \)  
+
+\textbf{To Prove:} \( f(n) \) is \( \Omega(n^2) \) by the formal definition.  
+
+If \( f(n) \) is \( \Omega(n^2) \), then \[\ f(n) \geq C \cdot g(n) \] \[\ n^2 \geq C \cdot g(n) \]  
+
+\textbf{Considering:} \[\ g(n) = n \log n \]we have \[ n^2 \geq C \cdot n \log n \]
+
+Dividing both sides by \( n \log n \):  
+\[\ \frac{n}{\log n} \geq C \] \[\ C \leq \frac{n}{\log n} \].  
+
+\textbf{Verification:}  
+For \( C = 4 \) and \( n = 2 \), the given equation holds good.
+
+
+\end{enumerate}
+\finishproblem
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 2
+\begin{prob} \textbf{(20 points)} In the following, use the iteration method to find the asymptotic notation of the order of growth of the recurrences:
+\end{prob}
+
+\begin{enumerate}[label=(\alph*)]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 2a
+\item $T(n)= \begin{cases}1 & \text { if } n=1 \\
+2 T\left(\frac{n}{2}\right)+b & \text { if } n>1\end{cases}$ \\
+\solution
+
+\begin{document}
+\textbf{Given Recurrence function is}
+\[
+T(n) = 2 \cdot T(n/2) + b
+\]
+\[
+\quad T(n) = 2 \cdot \left( 2 \cdot \left( T(n/4) + b \right) \right) + b
+\]
+\[
+\quad T(n) = 4 \cdot T(n/4) + 3b
+\]
+
+Substituting for \( T(n/4) \),  
+\[
+\quad T(n) = 4 \cdot \left( 2 \cdot T(n/8) + b \right) + 3b
+\]
+\[
+\quad T(n) = 8 \cdot T(n/8) + 7b
+\]
+
+If \( n = k \),  
+\[
+T(k) = 2^k \cdot T(k/2^k) + (2^k - 1) \cdot b
+\]
+
+Upon subsequent substitution, it reaches \( T(1) \) where  
+\[
+\quad \frac{k}{2^k} = 1
+\]
+\[
+\quad k = \log n
+\]
+
+\[
+T(n) = 2^{\log n} \cdot T(1) + b \cdot \left( 2^{\log n} - 1 \right)
+\]
+\[
+\quad = n + b \cdot (n - 1)
+\]
+\[
+\quad = n(1 + b) - b
+\]
+
+Hence, the asymptotic notation would be \( \Theta(n) \).
+\finishproblem
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 2b
+\item $T(n)= \begin{cases}c & \text { if } n=0 \\
+T(n-1)+n+b & \text { if } n>1\end{cases}$ \\
+\solution
+
+\[
+T(n) = T(n-1) + n + b
+\]
+\[
+T(n) = \left[ T(n-2) + (n-1) + b \right] + n + b
+\]
+\[
+T(n) = \left[ T(n-3) + (n-2) + b \right] + (n-1) + b + n + b
+\]
+\[
+T(n) = T(n-3) + (n-2) + (n-1) + n + 3b
+\]
+
+\[
+T(n) = T(n-k) + (n-k) + \dots + (n-2) + (n-1) + n + 3b
+\]
+
+\[
+T(n) = T(0) + \sum_{i=0}^{n} (n-i) + nb
+\]
+
+\[
+= \frac{n(n+1)}{2} + nb + c
+\]
+
+\[
+= \frac{n^2}{2} + \frac{n}{2} + nb + c
+\]
+
+\text{From this, it can be inferred that the growth of complexity is } \[ {O}(n^2) \]
+
+\finishproblem
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 3
+\begin{prob} \textbf{(20 points)} Solve the following recurrences using the substitution method:
+\end{prob}
+
+\begin{enumerate}[label=(\alph*)]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 3a
+\item $T(n)= T(n-3) + 3\lg n$. Our guess is $T(n) = O(nlgn)$. Show that$ T(n) \le cn\lg n$ for some constant $c > 0$ (Note that $\lg n$ is monotonically increasing for $n>0$)\\
+\solution
+
+\textbf{Our guess:} \( O(n \log n) \)  
+
+\textbf{By formal definition,}  
+\[
+T(n) \leq C \cdot n \log n \quad \text{for constant } C > 0
+\]
+
+\[
+T(n) \leq C(n-3) \log(n-3) + 3 \log n
+\]
+
+\textbf{Since the logarithm function is monotonically increasing,}  
+\[
+\log n \geq \log (n-3)
+\]
+
+\[
+T(n) \leq C(n-3) \log n + 3 \log n
+\]
+
+\[
+T(n) \leq C n \log n - 3C \log n + 3 \log n
+\]
+
+\[
+T(n) \leq C n \log n - (3C + 3) \log n
+\]
+
+\textbf{For all } \( C \geq 1 \), \text{since the second term must be negative, }  
+\[
+3C + 3 \leq 0 \quad \Rightarrow \quad C \geq 1
+\]
+
+\[
+T(n) \leq C n \log n - (3C + 3) \log n
+\]
+
+\textbf{For } \( C = 1 \), \text{ the equation holds true:}  
+\[
+T(n) \leq n \log n - 6 \log n
+\]
+
+\textbf{Hence, the complexity of } \( T(n) \) \text{ is } \( O(n \log n) \).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 3b
+\item $T(n)= 4T(n/3) + n$. Our guess is $T(n) = O(n^{\log_3 4})$. Show that $T(n) \le cn^{\log_3 4}$ for some constant $c > 0$\\
+\solution
+
+\textbf{Our guess is} \; O(n^{\log_3 4})
+
+\textbf{By Formal Definition,}
+
+\[
+T(n) \leq C \cdot n^{\log_3 4} \quad \text{for constant } C > 0
+\]
+
+\[
+T(n) \leq 4 \cdot \left( C \cdot \left( \frac{n}{3} \right)^{\log_3 4} \right) + n
+\]
+
+\[
+T(n) \leq 4C \cdot \frac{n^{\log_3 4}}{4} + n
+\]
+
+\[
+T(n) \leq C \cdot n^{\log_3 4} + n
+\]
+
+\text{The } n \text{ term:}
+
+\[
+T(n) \leq C \cdot n^{\log_3 4} + n
+\]
+
+\text{Since we have an additional linear term.}
+
+\textbf{Improving the guess,}
+
+\[
+T(n) \leq C \cdot \left(n^{\log_3 4} - n\right)
+\]
+
+\[
+T(n) \leq 4 \cdot C \cdot \left(\frac{n}{3}\right)^{\log_3 4} - n + n
+\]
+
+\[
+T(n) \leq 4C \cdot \left(\frac{n^{\log_3 4}}{3^{\log_3 4}}\right) - 4C \cdot n + n
+\]
+
+\[
+T(n) \leq 4C \cdot \left(\frac{n^{\log_3 4}}{4}\right) - 4C \cdot n + n
+\]
+
+\text{For } C = 1:
+
+\[
+T(n) \leq n^{\log_3 4} - 3n
+\]
+
+\textbf{Hence, the complexity would be}
+
+\[
+T(n) \leq n^{\log_3 4} - n
+\]
+
+
+
+\end{enumerate}
+\finishproblem
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 4
+\begin{prob} \textbf{(20 points)} You can also think of insertion sort as a recursive algorithm. In order to sort \code{A[1:n]}, recursively sort the subarray \code{A[1:n-1]}. Write pseudocode for this recursive version of insertion sort. Give a recurrence for its worst-case running time.
+\end{prob}
+\solution
+
+\begin{document}
+
+\textbf{Algorithm: InsertionSort} 
+
+\begin{verbatim}
+InsertionSort(arr, n):
+    if n < 1:
+        return
+
+    InsertionSort(arr, n-1)
+
+    key = arr[n]
+    index = n - 1
+
+    while index > 0 and key < arr[index]:
+        arr[index + 1] = arr[index]
+        index -= 1
+
+    arr[index + 1] = key
+\end{verbatim}
+
+
+\finishproblem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 5
+\begin{prob} \textbf{(20 points)} Let $f(n)$ and $g(n)$ be asymptotically nonnegative functions. Using the basic definition of $\Theta$-notation, prove that $\max{f(n), g(n)} = \Theta(f(n)+g(n))$
+\end{prob}
+\solution
+
+\begin{document}
+
+\textbf{By Definition of} \( \Theta(f(n) + g(n)) \),
+
+\[
+\max \{ f(n), g(n) \} = \Theta(f(n) + g(n))
+\]
+
+\[
+c_1(f(n) + g(n)) \leq \max(f(n), g(n)) \leq c_2(f(n) + g(n))
+\]
+
+\textbf{Considering the Upper Bound,}
+
+\[
+\max(f(n), g(n)) \leq c_2(f(n) + g(n))
+\]
+
+For \( c_2 \geq 1 \), then
+
+\[
+\max(f(n), g(n)) \leq (f(n) + g(n))
+\]
+
+\textbf{Considering the Lower Bound,}
+
+\[
+\max(f(n), g(n)) \geq c_1(f(n) + g(n))
+\]
+
+For \( c_1 \leq \frac{1}{2} \), then
+
+\[
+\max(f(n), g(n)) \geq 0.5(f(n) + g(n))
+\]
+
+\finishproblem
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 6
+\begin{prob} \textbf{(20 points)} Is $2^{n+1}=O(2^n)$? Is $2^{2n}=O(2^n)$? Use the formal definition of $O$-notation to answer these two questions.
+\end{prob}
+\solution
+
+\begin{document}
+
+\textbf{(a)} 
+
+Given function is \( f(n) = 2^{(n+1)} \). \\
+Applying the formal definition:
+
+\[
+f(n) \leq c \cdot g(n)
+\]
+
+Let's consider \( g(n) = 2^n \),
+
+\[
+2^{(n+1)} \leq C \cdot 2^n
+\]
+
+If \( c \geq 2 \):
+
+Taking \( c = 2 \),
+
+\[
+2^{(n+1)} \leq 2 \cdot 2^n
+\]
+
+\[
+2^{(n+1)} \leq 2^{(n+1)}
+\]
+
+For \( c \geq 2 \), taking \( c = 4 \),
+
+\[
+2^{(n+1)} \leq 4 \cdot 2^n
+\]
+
+\[
+2^{(n+1)} \leq 2^2 \cdot 2^n
+\]
+
+\[
+2^{(n+1)} \leq 2^{(2 + n)}
+\]
+
+\t \t The equation is satisfied for the value of c.
+
+
+\textbf{(b)}
+
+Given:
+
+\[
+f(n) = 2^{(2n)}
+\]
+\[
+g(n) = 2^n
+\]
+
+Applying the formal definition:
+
+\[
+f(n) \leq c \cdot g(n)
+\]
+
+\[
+2^{(2n)} \leq c \cdot 2^n
+\]
+
+\[
+c \geq 2^n
+\]
+
+There cannot be any constant \( c \) such that it is always greater than \( 2^n \), 
+as \( 2^n \) grows exponentially.
+
+\end{document}
