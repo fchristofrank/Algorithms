@@ -158,53 +158,69 @@
 \solution
 \\
 
-
 The given function, \( f(n) = n^2 + 7n + 1 \).  
-\textbf
-\\{To Prove:} \( f(n) \) is \(\Omega(n^2)\).  \\
 
-\textbf{By the formal definition:}\\ if \( f(n) \) is \( \Omega(n^2) \), then
+\textbf{By the formal definition of the lower bound (Big-Omega notation), there exist positive constants \( c \) and \( n_0 \) such that for all \( n \geq n_0 \):}  
 
 \[
-f(n) \geq C \cdot g(n)
+f(n) \geq c \cdot g(n)
 \]
+
 \[
-n^2 + 7n + 1 \geq C \cdot g(n)
+n^2 + 7n + 1 \geq c \cdot g(n)
 \]
+
 Considering \( g(n) = n^2 \), we have  
+
 \[
-n^2 + 7n + 1 \geq C \cdot n^2
+n^2 + 7n + 1 \geq c \cdot n^2
 \]
-Taking the value of \( C = 1 \), we get  
+
+Taking the value of \( c = 1 \), we get  
+
 \[
 n^2 + 7n + 1 \geq n^2
 \]
+
 \[
 7n + 1 \geq 0
 \]
+
 \[
 n \geq -\frac{1}{7}
 \]
-Hence, for all values above \( n > 1 \) here n = 1 and with \( C = 1 \), the equation holds good.
+
+Since we consider asymptotic behavior for large values of \( n \), we take \( n_0 = 1 \).  
+Thus, for all \( n \geq 1 \) and with \( c = 1 \), the inequality holds. 
+
+\[
+\therefore f(n) = \Omega(n^2)
+\]
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1b
 \item $3n^{2}+n-10 \text { is } O(n^{2})$ \\
 \solution
 
 The given function, \( f(n) = 3n^2 + n - 10 \).\\
-\textbf{By the formal definition:}\\
+\textbf{By the formal definition of Big O:}\\
+Let \( f(n) = O(g(n)) \) if and only if there exist positive constants \( c \) and \( n_0 \) such that for all \( n \geq n_0 \),
+\[
+f(n) \leq c \cdot g(n)
+\]
+\textbf{Now applying this to the problem:}\\
 If \( f(n) \) is \( O(n^2) \), then  
 \[
-f(n) \leq C \cdot g(n)
+f(n) \leq c \cdot g(n)
 \]
 \[
-3n^2 + n - 10 \leq C \cdot g(n)
+3n^2 + n - 10 \leq c \cdot g(n)
 \]
 Considering \( g(n) = n^2 \), we have  
 \[
-3n^2 + n - 10 \leq C \cdot n^2
+3n^2 + n - 10 \leq c \cdot n^2
 \]
-Taking the value of \( C = 4 \), we get  
+Taking the value of \( c = 4 \), we get  
 \[
 3n^2 + n - 10 \leq 4n^2
 \]
@@ -212,30 +228,84 @@ Taking the value of \( C = 4 \), we get
 n^2 - n + 10 \geq 0
 \]
 From this expression, for any value of \( n \), the equation is satisfied.\\
-Hence, for all values above \( n > 1 \), here n = 1 and with \( C = 4 \), the equation holds good.
+Hence, for all values above \( n > 1 \), here for \( n = 1 \) and with \( c = 4 \), the equation holds good.\\
 
+\textbf{Now let's check for a particular value:}\\
+We check if the inequality holds true for \( n = 2 \) and \( c = 4 \).\\
+
+For \( f(n) = 3n^2 + n - 10 \) and \( g(n) = n^2 \), we check if:
+\[
+f(n) \leq c \cdot g(n)
+\]
+Substituting \( n = 2 \) and \( c = 4 \), we get:
+\[
+3(2)^2 + 2 - 10 \leq 4 \cdot (2)^2
+\]
+\[
+3(4) + 2 - 10 \leq 4 \cdot 4
+\]
+\[
+12 + 2 - 10 \leq 16
+\]
+\[
+4 \leq 16
+\]
+This inequality holds true for \( n = 2 \) and \( c = 4 \).
+\\ \\ \\ \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 1c
 \item $n^2 \text { is } \Omega(n\lg n)$ \\
 \solution
 
-\textbf{Given function:} \( f(n) = n^2 \)  
+\textbf{Given function:} \( f(n) = n^2 \)
 
-\textbf{To Prove:} \( f(n) \) is \( \Omega(n^2) \) by the formal definition.  
+\textbf{To Prove:} \( f(n) \) is \( \Omega(n^2) \) by the formal definition.
 
-If \( f(n) \) is \( \Omega(n^2) \), then \[\ f(n) \geq C \cdot g(n) \] \[\ n^2 \geq C \cdot g(n) \]  
+\textbf{By the formal definition of Big Omega:}\\
+Let \( f(n) = \Omega(g(n)) \) if and only if there exist positive constants \( c \) and \( n_0 \) such that for all \( n \geq n_0 \),
+\[
+f(n) \geq c \cdot g(n)
+\]
 
-\textbf{Considering:} \[\ g(n) = n \log n \]we have \[ n^2 \geq C \cdot n \log n \]
+\textbf{Now applying this to the problem:}\\
+If \( f(n) \) is \( \Omega(n^2) \), then
+\[
+f(n) \geq c \cdot g(n)
+\]
+\[
+n^2 \geq c \cdot g(n)
+\]
 
-Dividing both sides by \( n \log n \):  
-\[\ \frac{n}{\log n} \geq C \] \[\ C \leq \frac{n}{\log n} \].  
+\textbf{Considering:} 
+\[
+g(n) = n \log n
+\]
+we have
+\[
+n^2 \geq c \cdot n \log n
+\]
 
-\textbf{Verification:}  
-For \( C = 4 \) and \( n = 2 \), the given equation holds good.
+\textbf{Dividing both sides by} \( n \log n \):
+\[
+\frac{n}{\log n} \geq c
+\]
+\[
+c \leq \frac{n}{\log n}
+\]
 
+\textbf{Verification:}\\
+For \( c = 4 \) and \( n = 10 \), the inequality holds true:
+\[
+\frac{10}{\log 10} = \frac{10}{2.3026} \approx 4.34 \geq 4
+\]
+
+Thus, the inequality holds for \( n = 10 \) for \( c = 4 \).
 
 \end{enumerate}
-\finishproblem
-
+\\
+\\
+\\
+\\
+\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 2
 \begin{prob} \textbf{(20 points)} In the following, use the iteration method to find the asymptotic notation of the order of growth of the recurrences:
@@ -247,19 +317,16 @@ For \( C = 4 \) and \( n = 2 \), the given equation holds good.
 2 T\left(\frac{n}{2}\right)+b & \text { if } n>1\end{cases}$ \\
 \solution
 
-\begin{document}
 \textbf{Given Recurrence function is}
 \[
 T(n) = 2 \cdot T(n/2) + b
 \]
-\[
-\quad T(n) = 2 \cdot \left( 2 \cdot \left( T(n/4) + b \right) \right) + b
-\]
-\[
-\quad T(n) = 4 \cdot T(n/4) + 3b
-\]
+Upon next iteration,
+\[\quad T(n) = 2 \cdot \left( 2 \cdot \left( T(n/4) + b \right) \right) + b\]
+\[\quad T(n) = 4 \cdot T(n/4) + 3b\]
 
-Substituting for \( T(n/4) \),  
+Upon next iteration, Substituting for \( T(n/4) \),  
+
 \[
 \quad T(n) = 4 \cdot \left( 2 \cdot T(n/8) + b \right) + 3b
 \]
@@ -272,26 +339,14 @@ If \( n = k \),
 T(k) = 2^k \cdot T(k/2^k) + (2^k - 1) \cdot b
 \]
 
-Upon subsequent substitution, it reaches \( T(1) \) where  
-\[
-\quad \frac{k}{2^k} = 1
-\]
-\[
-\quad k = \log n
-\]
+Upon subsequent substitution, it reaches the base case \( T(1) \) when  
+\[ \quad \frac{k}{2^k} = 1 \]
+\[ \quad k = \log n \]
+\[ T(n) = 2^{\log n} \cdot T(1) + b \cdot \left( 2^{\log n} - 1 \right) \]
+\[\quad = n + b \cdot (n - 1)\]
+\[ \quad = n(1 + b) - b \]
 
-\[
-T(n) = 2^{\log n} \cdot T(1) + b \cdot \left( 2^{\log n} - 1 \right)
-\]
-\[
-\quad = n + b \cdot (n - 1)
-\]
-\[
-\quad = n(1 + b) - b
-\]
-
-Hence, the asymptotic notation would be \( \Theta(n) \).
-\finishproblem
+Hence, the asymptotic notation would be \( \theta(n) \).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 2b
 \item $T(n)= \begin{cases}c & \text { if } n=0 \\
@@ -327,9 +382,11 @@ T(n) = T(0) + \sum_{i=0}^{n} (n-i) + nb
 = \frac{n^2}{2} + \frac{n}{2} + nb + c
 \]
 
-\text{From this, it can be inferred that the growth of complexity is } \[ {O}(n^2) \]
+\text{From this, it can be inferred that the growth of complexity is } \[ \theta(n^2) \]
 
 \finishproblem
+\end{enumerate}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 3
@@ -378,19 +435,23 @@ T(n) \leq C n \log n - (3C + 3) \log n
 T(n) \leq C n \log n - (3C + 3) \log n
 \]
 
-\textbf{For } \( C = 1 \), \text{ the equation holds true:}  
+\textbf{To verify, Let consider } \( C = 1 \), \text{ the equation holds true:}  
 \[
 T(n) \leq n \log n - 6 \log n
 \]
 
 \textbf{Hence, the complexity of } \( T(n) \) \text{ is } \( O(n \log n) \).
+\\
 
+\finishproblem
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 3b
+\begin{enumerate}[label=(b)]
 \item $T(n)= 4T(n/3) + n$. Our guess is $T(n) = O(n^{\log_3 4})$. Show that $T(n) \le cn^{\log_3 4}$ for some constant $c > 0$\\
 \solution
 
-\textbf{Our guess is} \; O(n^{\log_3 4})
+\textbf{Our guess is} \[ O(n^{\log_3 4}) \]
 
 \textbf{By Formal Definition,}
 
@@ -418,48 +479,48 @@ T(n) \leq C \cdot n^{\log_3 4} + n
 
 \text{Since we have an additional linear term.}
 
-\textbf{Improving the guess,}
+\textbf{Improving the guess}
 
 \[
-T(n) \leq C \cdot \left(n^{\log_3 4} - n\right)
+T(n) \leq C \cdot n^{\log_3 4} - d n
+\]
+
+\textbf{Substituting the guess to the given function}
+
+\[
+T(n) \leq 4 \bracket{ C \cdot \left(\frac{n}{3}\right)^{\log_3 4} - d (n/3) }+ n
 \]
 
 \[
-T(n) \leq 4 \cdot C \cdot \left(\frac{n}{3}\right)^{\log_3 4} - n + n
+T(n) \leq 4C \cdot \left(\frac{n^{\log_3 4}}{3^{\log_3 4}}\right) - 4 d \cdot (n/3) + n
 \]
 
 \[
-T(n) \leq 4C \cdot \left(\frac{n^{\log_3 4}}{3^{\log_3 4}}\right) - 4C \cdot n + n
+T(n) \leq 4C \cdot \left(\frac{n^{\log_3 4}}{4}\right) - 4d \cdot (n/3) + n
+\]
+
+\text{For } C = 1 and d = 1:
+
+\[
+T(n) \leq n^{\log_3 4} - (4n/3) + n
 \]
 
 \[
-T(n) \leq 4C \cdot \left(\frac{n^{\log_3 4}}{4}\right) - 4C \cdot n + n
+T(n) \leq n^{\log_3 4} - (n/3)
 \]
 
-\text{For } C = 1:
-
-\[
-T(n) \leq n^{\log_3 4} - 3n
-\]
-
-\textbf{Hence, the complexity would be}
-
-\[
-T(n) \leq n^{\log_3 4} - n
-\]
-
-
+\textbf{Hence, the complexity would be O (n^{\log_3 4} - n)}
 
 \end{enumerate}
-\finishproblem
 
+\\
+\\
+\finishproblem
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Problem 4
 \begin{prob} \textbf{(20 points)} You can also think of insertion sort as a recursive algorithm. In order to sort \code{A[1:n]}, recursively sort the subarray \code{A[1:n-1]}. Write pseudocode for this recursive version of insertion sort. Give a recurrence for its worst-case running time.
 \end{prob}
 \solution
-
-\begin{document}
 
 \textbf{Algorithm: InsertionSort} 
 
@@ -478,8 +539,49 @@ InsertionSort(arr, n):
         index -= 1
 
     arr[index + 1] = key
-\end{verbatim}
 
+\end{verbatim}
+\begin{enumerate}
+
+To calculate the recurrence relation for the worst case,
+
+\[
+T(n) = 
+\begin{cases} 
+    c & \text{if } n = 1 \text{ (base case)}\\
+    T(n-1) + c(n-1) + d & \text{if } n > 0 
+\end{cases}
+\]
+
+By using iteration method,\\
+
+1st Iteration : \[ T(n) = T(n-1) + c(n-1) + d \]
+
+2nd Iteration : \[ T(n) = T(n-2) + c(n-2) + d + c(n-1) + d \]
+
+3rd Iteration : \[ T(n) = T(n-3) + c(n-3) + d c(n-2) + d + c(n-1) + d + \]
+
+(n-1)th Iteration : \[ T(n) = T(1) + c(n-(n-1))+ c(n-(n-2)) + ... + (n-1).d \]
+
+\[ T(n) = T(1) + c(1+2+3+4..+(n-1)) + ... + (n-1).d \]
+
+\[ T(n) = T(1) + c(\frac{n(n-1)}{2}) + (n-1).d \]
+
+\[ T(n) = k + c(\frac{n(n-1)}{2}) + (nd-d) \]
+
+\[ T(n) = k + \frac{cn^2}{2} - \frac{cn}{2} + (nd-d) \]
+
+We combine, k, $-\frac{cn}{2}$ , -d to a single term to parse the logic better
+
+\[ T(n) = \frac{cn^2}{2} + nd + a \]
+
+where a = $k - \frac{cn}{2} -d$ \\
+
+Therefore, the expression we can understand that the term $n^2$, which increases faster than the \\
+other linear terms. Thus proving that $T(n) = O(n^2)$
+
+
+\end{enumerate}
 
 \finishproblem
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -487,8 +589,6 @@ InsertionSort(arr, n):
 \begin{prob} \textbf{(20 points)} Let $f(n)$ and $g(n)$ be asymptotically nonnegative functions. Using the basic definition of $\Theta$-notation, prove that $\max{f(n), g(n)} = \Theta(f(n)+g(n))$
 \end{prob}
 \solution
-
-\begin{document}
 
 \textbf{By Definition of} \( \Theta(f(n) + g(n)) \),
 
@@ -509,7 +609,7 @@ c_1(f(n) + g(n)) \leq \max(f(n), g(n)) \leq c_2(f(n) + g(n))
 For \( c_2 \geq 1 \), then
 
 \[
-\max(f(n), g(n)) \leq (f(n) + g(n))
+\max(f(n), g(n)) \leq f(n) + g(n)
 \]
 
 \textbf{Considering the Lower Bound,}
@@ -531,8 +631,6 @@ For \( c_1 \leq \frac{1}{2} \), then
 \begin{prob} \textbf{(20 points)} Is $2^{n+1}=O(2^n)$? Is $2^{2n}=O(2^n)$? Use the formal definition of $O$-notation to answer these two questions.
 \end{prob}
 \solution
-
-\begin{document}
 
 \textbf{(a)} 
 
@@ -605,5 +703,7 @@ c \geq 2^n
 
 There cannot be any constant \( c \) such that it is always greater than \( 2^n \), 
 as \( 2^n \) grows exponentially.
+
+\end{enumerate}
 
 \end{document}
